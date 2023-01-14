@@ -12,8 +12,11 @@ mais elevada e a segunda com a temperatura mais baixa.
 
  ## Postman 
 
-É um aplicativo usado para testes de API. É um cliente HTTP que testa requisições HTTP, utilizando uma interface gráfica com o usuário, através da qual
+É um aplicativo usado para testes de **API**. É um cliente HTTP que testa requisições HTTP, utilizando uma interface gráfica com o usuário, através da qual
 obtemos diferentes tipos de respostas que precisam ser posteriormente validadas.
+
+O Postman é um cliente da API que torna mais fácil para os desenvolvedores criar, compartilhar, testar e documentar **APIs**. Com esta solução de código aberto,
+os usuários podem criar e salvar solicitações HTTP/s simples e complexas, bem como ler suas respostas.
 
 ## Métodos
 
