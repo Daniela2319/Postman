@@ -7,8 +7,8 @@ um provedor e um usuário de informações, estabelecendo o conteúdo exigido pe
 design da API de um serviço meteorológico pode especificar que o usuário forneça um CEP e o produtor responda em duas partes, a primeira contendo a temperatura
 mais elevada e a segunda com a temperatura mais baixa.
 
-![image](https://user-images.githubusercontent.com/106537496/212498094-59accaa2-8041-41bf-9b4e-50df75a5a6bd.png)
-<!-- Referencias -->
+  
+
 
  ## Postman 
 
