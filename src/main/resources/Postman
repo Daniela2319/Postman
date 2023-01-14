@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "568583a3-22b3-4594-9b95-f0fe62040eb9",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23563453"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//teste verificar se usuario esta cadastrado\r",
+									"var req = JSON.parse(request.data)\r",
+									"console.log(req.username)\r",
+									"pm.collectionVariables.set(\"username\", req.username);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function (){\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"    pm.response.to.have.property(\"code\", 200).to.be.a(\"number\");\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Properties from body are correct\", function (){\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(pm.response.json().code).to.be.a('number')\r",
+									"    pm.expect(pm.response.json().type).to.be.a('string')\r",
+									"    pm.expect(pm.response.text()).to.include('type');\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function (){\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 3,\r\n  \"username\": \"dani\",\r\n  \"firstName\": \"Daniela\",\r\n  \"lastName\": \"Velter\",\r\n  \"email\": \"dani.edu.java@gmail.com\",\r\n  \"password\": \"abd123\",\r\n  \"phone\": \"41995016354\",\r\n  \"userStatus\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url_global}}/user"
+					},
+					"response": [
+						{
+							"name": "Create user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 3,\r\n  \"username\": \"dani\",\r\n  \"firstName\": \"Daniela\",\r\n  \"lastName\": \"Velter\",\r\n  \"email\": \"dani.edu.java@gmail.com\",\r\n  \"password\": \"abd123\",\r\n  \"phone\": \"41995016354\",\r\n  \"userStatus\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url_global}}/user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 14 Jan 2023 21:10:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, DELETE, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, api_key, Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.2.9.v20150224)"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"type\": \"unknown\",\n    \"message\": \"3\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    const responseJson = pm.response.json();\r",
+									"    console.log(responseJson)\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(responseJson).to.have.property('message')\r",
+									"    pm.response.to.have.header('Content-type', 'application/json')\r",
+									"});\r",
+									"// teste do tempo relacionado do login\r",
+									"pm.test(\"Response time is less than 200ms\", function (){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"//corpo minimo\r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"code\":{\"type\": \"number\"},\r",
+									"        \"type\": {\"type\": \"string\"},\r",
+									"        \"message\": {\"type\": \"string\"}\r",
+									"    },\r",
+									"    required : [\"code\", \"type\", \"message\"]\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(pm.response.json()).to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_environment}}/user/login?username=dani&password=abc123",
+							"host": [
+								"{{base_url_environment}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "dani"
+								},
+								{
+									"key": "password",
+									"value": "abc123"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url_environment}}/user/login?username=dani&password=abc123",
+									"host": [
+										"{{base_url_environment}}"
+									],
+									"path": [
+										"user",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "dani"
+										},
+										{
+											"key": "password",
+											"value": "abc123"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jan 2023 23:57:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, DELETE, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, api_key, Authorization"
+								},
+								{
+									"key": "X-Expires-After",
+									"value": "Thu Jan 12 00:57:35 UTC 2023"
+								},
+								{
+									"key": "X-Rate-Limit",
+									"value": "5000"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.2.9.v20150224)"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"type\": \"unknown\",\n    \"message\": \"logged in user session:1673481455799\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get by username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url_environment}}/user/dani"
+					},
+					"response": [
+						{
+							"name": "Get by username",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url_environment}}/user/dani"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 12 Jan 2023 00:37:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, DELETE, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, api_key, Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.2.9.v20150224)"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"username\": \"dani\",\n    \"firstName\": \"Daniela\",\n    \"lastName\": \"Velter\",\n    \"email\": \"dani.edu.java@gmail.com\",\n    \"password\": \"abd123\",\n    \"phone\": \"41995016354\",\n    \"userStatus\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// verificar usarname se usuario foi cadastrado\r",
+									"pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function(){\r",
+									"    pm.response.to.have.status(\"OK\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message return name of person deleted\", function(){\r",
+									"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"username\"))\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url_environment}}/user/{{username}}"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": {
+			"value": "{{api-key}}",
+			"key": "api-key"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url_collection",
+			"value": "https://petstore.swagger.io",
+			"type": "string"
+		},
+		{
+			"key": "api-key",
+			"value": "special-key",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "dani"
+		}
+	]
+}

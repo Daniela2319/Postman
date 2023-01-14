@@ -7,6 +7,7 @@ import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
 
@@ -39,12 +40,13 @@ public class UserTest {
 
     @BeforeEach
     public void setRequest(){
-        request = given()
+        request = given().config(RestAssured.config().logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails()))
                 .header("api-key","special-key")
                 .contentType(ContentType.JSON);
     }
 
     @Test
+    @Order(1)
     public void CreateNewUser_WithValidData_ReturnOk(){ // inicia o teste fazendo o que vai validar
 
       //  given().header().when().get.then.assertThat() estrutura basica para restAssured
@@ -61,4 +63,66 @@ public class UserTest {
 
 
     }
+    @Test
+    @Order(2)
+    public void GetLogin_ValidUser_ReturnOk(){
+
+        request
+                .param("username", user.getUsername())
+                .param("password", user.getPassword())
+                .when()
+                .get("/user/login")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and().time(lessThan(5227L))
+                .and().body(matchesJsonSchemaInClasspath("loginResponseSchema.json"));
+    }
+
+    @Test
+    @Order(3)
+    public void GetUserByUsername_userIsValid_ReturnOk(){
+
+        request
+                .when()
+                .get("/user/" + user.getUsername())
+                .then()
+                .assertThat().statusCode(200)
+                .and().time(lessThan(5227L))
+                .and().body("firstName", equalTo(user.getFirstName()));
+
+        // TO DO: Schema Validation
+    }
+
+    @Test
+    @Order(4)
+    public void DeleteUser_UserExists_ReturnOk(){
+
+        request
+                .when()
+                .delete("/user/" + user.getUsername())
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and().time(lessThan(5227L))
+                .log();
+    }
+
+    @Test
+    public void CreateNewUser_WithInvalidBody_ReturnBadRequest(){
+
+        Response response = request
+                .body("teste")
+                .when()
+                .post("/user")
+                .then()
+                .extract()
+                .response();
+
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(400, response.statusCode());
+        Assertions.assertEquals(true, response.getBody().asPrettyString().contains("unknown"));
+        Assertions.assertEquals(3, response.body().jsonPath().getMap("$").size());
+    }
+
 }
