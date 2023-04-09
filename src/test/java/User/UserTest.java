@@ -121,7 +121,7 @@ public class UserTest {
 
         Assertions.assertNotNull(response);
         Assertions.assertEquals(400, response.statusCode());
-        Assertions.assertEquals(true, response.getBody().asPrettyString().contains("unknown"));
+        Assertions.assertTrue(response.getBody().asPrettyString().contains("unknown"));
         Assertions.assertEquals(3, response.body().jsonPath().getMap("$").size());
     }
 

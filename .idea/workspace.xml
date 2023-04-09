@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bf54573-0ec5-4647-b6d7-0544d7fc6a9d" name="Changes" comment="Postman and RestAssud">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Postman" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginResponseSchema.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/User/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/User/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +50,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.UserTest.CreateNewUser_WithInvalidBody_ReturnBadRequest">
+  <component name="RunManager" selected="JUnit.UserTest">
     <configuration name="UserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RestAssured" />
       <extension name="coverage">
@@ -115,10 +114,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserTest.GetUserByUsername_userIsValid_ReturnOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RestAssured" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="User" />
+      <option name="MAIN_CLASS_NAME" value="User.UserTest" />
+      <option name="METHOD_NAME" value="GetUserByUsername_userIsValid_ReturnOk" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserTest.CreateNewUser_WithInvalidBody_ReturnBadRequest" />
         <item itemvalue="JUnit.UserTest" />
+        <item itemvalue="JUnit.UserTest.GetUserByUsername_userIsValid_ReturnOk" />
+        <item itemvalue="JUnit.UserTest.CreateNewUser_WithInvalidBody_ReturnBadRequest" />
         <item itemvalue="JUnit.UserTest.CreateNewUser_WithValidData_ReturnOk" />
         <item itemvalue="JUnit.UserTest.GetLogin_ValidUser_ReturnOk" />
       </list>
@@ -140,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673657008760</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Postman and RestAssud">
+      <created>1673730982107</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673730982108</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
