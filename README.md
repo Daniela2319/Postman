@@ -7,10 +7,16 @@ um provedor e um usuário de informações, estabelecendo o conteúdo exigido pe
 design da API de um serviço meteorológico pode especificar que o usuário forneça um CEP e o produtor responda em duas partes, a primeira contendo a temperatura
 mais elevada e a segunda com a temperatura mais baixa.
 
-## Postman
+  
 
-É um aplicativo usado para testes de API. É um cliente HTTP que testa requisições HTTP, utilizando uma interface gráfica com o usuário, através da qual
+
+ ## Postman 
+
+É um aplicativo usado para testes de **API**. É um cliente HTTP que testa requisições HTTP, utilizando uma interface gráfica com o usuário, através da qual
 obtemos diferentes tipos de respostas que precisam ser posteriormente validadas.
+
+O Postman é um cliente da API que torna mais fácil para os desenvolvedores criar, compartilhar, testar e documentar **APIs**. Com esta solução de código aberto,
+os usuários podem criar e salvar solicitações HTTP/s simples e complexas, bem como ler suas respostas.
 
 ## Métodos
 
@@ -21,3 +27,5 @@ O Postman oferece muitos métodos de interação de endpoint. A seguir estão al
 * PUT: Substituir informações
 * PATCH: Atualizar certas informações
 * Delete: Excluir informações
+
+
